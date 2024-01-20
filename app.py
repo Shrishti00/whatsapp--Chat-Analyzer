@@ -2,6 +2,8 @@ import streamlit as st
 import preprocessor,helper
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
+import pandas as pd
 
 st.sidebar.title("Whatsapp Chat Analyzer")
 
@@ -75,6 +77,9 @@ if uploaded_file is not None:
             plt.xticks(rotation='vertical')
             st.pyplot(fig)
 
+        user_heatmap_cleaned = user_heatmap.fillna(0)  # Replace NaN with 0, or use another strategy
+        ax = sns.heatmap(user_heatmap_cleaned)
+        
         st.title("Weekly Activity Map")
         user_heatmap = helper.activity_heatmap(selected_user,df)
         fig,ax = plt.subplots()
